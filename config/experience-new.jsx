@@ -1,6 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import Python from "@/components/technologies/Python";
-import HTML from "@/components/technologies/HTML";
+import HTML from "@/components/technologies/Html";
 import CSS from "@/components/technologies/CSS";
 import JavaScript from "@/components/technologies/JavaScript";
 
