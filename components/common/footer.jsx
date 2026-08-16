@@ -1,0 +1,6 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { footerConfig } from "@/config/footer";
+import Container from "./container";
+export default function Footer() {
+    return (_jsx("footer", { className: "py-10", children: _jsx(Container, { children: _jsxs("div", { className: "footer-panel", children: [_jsx("div", { className: "logo-mark text-center text-xl", children: "TANMAY." }), _jsx("p", { className: "mt-3 text-center text-sm text-[var(--muted)]", children: footerConfig.text }), _jsxs("p", { className: "mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-[var(--text)]", children: [_jsx("a", { href: "https://github.com/Tanmaysriv", target: "_blank", rel: "noreferrer noopener", children: "GitHub" }), _jsx("a", { href: "https://www.linkedin.com/in/tanmaysrivastava888/", target: "_blank", rel: "noreferrer noopener", children: "LinkedIn" }), _jsx("a", { href: "https://leetcode.com/u/salvatore007/", target: "_blank", rel: "noreferrer noopener", children: "LeetCode" }), _jsx("a", { href: "mailto:srivastavatanmay888@gmail.com", children: "Email" })] }), _jsxs("p", { className: "mt-6 text-center text-sm text-[var(--muted)]", children: ["\u00A9 ", new Date().getFullYear(), " Tanmay Srivastava. ", footerConfig.copyright] })] }) }) }));
+}

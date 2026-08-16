@@ -1,0 +1,187 @@
+---
+title: "ARVANA"
+description: "AR-powered e-commerce platform for virtually trying products before purchase."
+image: "/project/arvana/hero.png"
+status: "Completed"
+timeline: "6 Months"
+role: "Full Stack Developer"
+team: "Solo"
+liveDemo: "https://arvana-pvt.vercel.app/"
+sourceCode: "https://github.com/Tanmaysriv/ARVANA-pvt"
+technologies:
+  - "React"
+  - "Vite"
+  - "Three.js"
+  - "TensorFlow.js"
+  - "MediaPipe"
+  - "Node.js"
+  - "MongoDB"
+---
+
+# ARVANA
+
+## AR Virtual Try-On E-Commerce Platform
+
+ARVANA is an AR-powered e-commerce platform that allows customers to virtually try products before purchasing.
+
+The platform combines augmented reality, computer vision, 3D rendering, and modern e-commerce functionality into a single experience.
+
+## Overview
+
+ARVANA supports multiple product categories and provides an interactive camera-based shopping experience.
+
+Users can explore products and experience virtual try-on capabilities using real-time body tracking and 3D visualization.
+
+## Key Features
+
+- Real-time AR try-on
+- AI-powered body tracking
+- 3D product visualization
+- Face detection
+- Hand detection
+- Pose detection
+- Interactive 3D rendering
+- Multi-category product experience
+- Shopping cart
+- Wishlist
+- Product management
+- Order management
+- Seller management
+- Payment integration
+- Responsive interface
+
+## Supported Products
+
+- Shoes
+- Watches
+- Clothes
+- Bags
+- Jewelry
+
+## AR Try-On Pipeline
+
+```text
+Camera
+   ↓
+MediaPipe Detection
+   ↓
+Face / Hand / Pose Landmarks
+   ↓
+TensorFlow.js Processing
+   ↓
+Position & Scale Calculation
+   ↓
+Three.js / React Three Fiber
+   ↓
+3D Product Overlay
+   ↓
+Real-Time AR Experience
+
+| Technology        | Purpose                        |
+| ----------------- | ------------------------------ |
+| React             | UI development                 |
+| Vite              | Frontend build tool            |
+| Three.js          | 3D rendering                   |
+| React Three Fiber | React integration for Three.js |
+| TensorFlow.js     | Browser-based ML               |
+| MediaPipe         | Body landmark detection        |
+| Tailwind CSS      | Styling                        |
+| Framer Motion     | Animations                     |
+
+                    USER
+                     │
+                     ▼
+              React Frontend
+                     │
+          ┌──────────┴──────────┐
+          │                     │
+       Camera                E-Commerce
+          │                     │
+          ▼                     ▼
+      MediaPipe             REST API
+          │                     │
+          ▼                     ▼
+    TensorFlow.js           Node.js
+          │                     │
+          ▼                     ▼
+      Three.js              MongoDB
+          │
+          ▼
+       AR Layer
+
+
+
+       ARVANA-pvt/
+│
+├── backend/
+│   ├── models/
+│   ├── routes/
+│   ├── middleware/
+│   ├── db/
+│   └── uploads/
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── ar/
+│   │   ├── services/
+│   │   ├── context/
+│   │   └── hooks/
+│   │
+│   └── public/
+│
+└── package.json
+
+Installation
+git clone https://github.com/Tanmaysriv/ARVANA-pvt.git
+cd ARVANA-pvt
+
+Backend
+cd backend
+npm install
+
+Frontend
+cd ../frontend
+npm install
+
+Environment Variables
+
+Create:
+
+backend/.env
+PORT=5000
+NODE_ENV=development
+MONGODB_URI=mongodb://localhost:27017/arvana
+JWT_SECRET=your-secret-key
+
+Running the Application
+Backend
+cd backend
+npm run dev
+Frontend
+cd frontend
+npm run dev
+
+Challenges
+Real-Time Tracking
+
+Maintaining stable product positioning while the user moves was an important challenge.
+
+MediaPipe landmarks are used to calculate the position required by the AR layer.
+
+3D Rendering
+
+Three.js is used to render and manipulate 3D product experiences in the browser.
+
+Performance
+
+Real-time AR processing can be computationally intensive, so the application focuses on efficient browser-side processing.
+
+Future Improvements
+*Improved garment fitting
+*Better body segmentation
+*More realistic 3D models
+*Improved lighting estimation
+*More product categories
+*Better mobile AR support
+*Advanced hand and body tracking

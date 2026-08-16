@@ -1,0 +1,20 @@
+"use client";
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import React, { useState } from "react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import Copied from "../svg/Copied";
+import Copy from "../svg/Copy";
+export function CodeCopyButton({ code }) {
+    const [isCopied, setIsCopied] = useState(false);
+    const copyToClipboard = async () => {
+        try {
+            await navigator.clipboard.writeText(code);
+            setIsCopied(true);
+            setTimeout(() => setIsCopied(false), 2000); // Reset after 2 seconds
+        }
+        catch (err) {
+            console.error("Failed to copy text: ", err);
+        }
+    };
+    return (_jsx("form", { action: copyToClipboard, className: "absolute top-3 right-3 rounded-md opacity-0 transition-all duration-200 group-hover:opacity-100 hover:cursor-pointer", title: isCopied ? "Copied!" : "Copy code", children: isCopied ? (_jsxs(Tooltip, { children: [_jsx(TooltipTrigger, { className: "cursor-pointer", children: _jsx(Copied, { className: "h-4 w-4 text-green-500" }) }), _jsx(TooltipContent, { children: "Copied to clipboard!" })] })) : (_jsxs(Tooltip, { children: [_jsx(TooltipTrigger, { className: "cursor-pointer", children: _jsx(Copy, { className: "text-secondary h-4 w-4" }) }), _jsx(TooltipContent, { children: "Copy to clipboard" })] })) }));
+}
