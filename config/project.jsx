@@ -130,7 +130,7 @@ export const projects = [
         github: "https://github.com/Tanmaysriv/Ele-Types",
         live: "https://ele-types.vercel.app/",
         details: true,
-        projectDetailsPageSlug: "/projects/Ele-Types",
+        projectDetailsPageSlug: "/projects/ele-Types",
         isWorking: true,
     },
 ];
