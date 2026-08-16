@@ -63,7 +63,7 @@ export const projects = [
     {
       id: "3d_iphone",  
       title: "3d_iphone",
-        image: "/project/3D_iphone/hero.png",
+        image: "/project/3d_iphone/hero.png",
 
         description: "Interactive React-based e-commerce experience showcasing the iPhone 15 Pro using 3D visualization, animations and modern UI.",
         video: "",
