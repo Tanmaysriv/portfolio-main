@@ -1,136 +1,243 @@
 "use client";
 
 import Link from "next/link";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+
 export default function Navbar() {
-  const { resolvedTheme, setTheme } = useTheme();
-
-  const toggleTheme = (event) => {
-    const nextTheme = resolvedTheme === "dark" ? "light" : "dark";
-
-    // Set the origin of the theme animation
-    document.documentElement.style.setProperty(
-      "--theme-x",
-      `${event.clientX}px`
-    );
-
-    document.documentElement.style.setProperty(
-      "--theme-y",
-      `${event.clientY}px`
-    );
-
-    // Use View Transitions when supported
-    if (document.startViewTransition) {
-      document.startViewTransition(() => {
-        setTheme(nextTheme);
-      });
-    } else {
-      setTheme(nextTheme);
-    }
-  };
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 mx-auto w-full max-w-6xl px-6 py-4">
+    <nav className="sticky top-0 z-50 w-full px-3 py-3 sm:px-6 sm:py-4">
       <div
         className="
-          flex items-center justify-between
+          mx-auto
+          w-full
+          max-w-6xl
           rounded-2xl
-          border border-black/10
-          bg-white/80
-          px-5 py-4
+          border
+          border-black/10
+          bg-background/90
+          px-4
+          py-3
+          shadow-sm
           backdrop-blur-md
-          transition-colors duration-300
           dark:border-white/10
-          dark:bg-black/80
+          sm:px-6
         "
       >
-        {/* Logo */}
-        <Link
-          href="/"
-          className="
-            font-semibold
-            tracking-widest
-            text-foreground
-            transition-colors duration-300
-          "
-        >
-          TANMAY.
-        </Link>
-
-        {/* Navigation */}
-        <div className="flex items-center gap-6 text-sm">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          {/* Logo */}
           <Link
-            href="/projects"
-            className="text-foreground transition-opacity hover:opacity-60"
-          >
-            PROJECTS
-          </Link>
-
-          <Link
-            href="/work-experience"
-            className="text-foreground transition-opacity hover:opacity-60"
-          >
-            WORK
-          </Link>
-
-          <Link
-            href="/blog"
-            className="text-foreground transition-opacity hover:opacity-60"
-          >
-            BLOG
-          </Link>
-
-          <Link
-            href="/coding"
-            className="text-foreground transition-opacity hover:opacity-60"
-          >
-            CODING
-          </Link>
-
-          {/* Theme Button */}
-          <button
-            type="button"
-            onClick={toggleTheme}
+            href="/"
+            onClick={() => setMenuOpen(false)}
             className="
-              relative
-              flex h-10 w-10
-              items-center justify-center
-              overflow-hidden
-              rounded-xl
-              border border-black/10
-              bg-white
-              transition-all duration-300
-              hover:scale-105
-              hover:rotate-3
-              dark:border-white/10
-              dark:bg-black
+              text-base
+              font-semibold
+              tracking-wide
+              sm:text-xl
             "
-            aria-label="Toggle theme"
           >
-            <Sun
-              className="
-                absolute h-4 w-4
-                rotate-0 scale-100
-                transition-all duration-300
-                dark:-rotate-90
-                dark:scale-0
-              "
-            />
+            TANMAY.
+          </Link>
 
-            <Moon
+          {/* Desktop navigation */}
+          <div className="hidden items-center gap-6 md:flex">
+            <NavLink href="/projects">PROJECTS</NavLink>
+            <NavLink href="/work-experience">WORK</NavLink>
+            <NavLink href="/blog">BLOG</NavLink>
+            <NavLink href="/coding">CODING</NavLink>
+
+            <ThemeButton />
+          </div>
+
+          {/* Mobile controls */}
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeButton />
+
+            <button
+              type="button"
+              onClick={() => setMenuOpen((open) => !open)}
               className="
-                absolute h-4 w-4
-                rotate-90 scale-0
-                transition-all duration-300
-                dark:rotate-0
-                dark:scale-100
+                flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-xl
+                border
+                border-border
+                transition-all
+                duration-200
+                hover:bg-muted
+                active:scale-95
               "
-            />
-          </button>
+              aria-label={
+                menuOpen
+                  ? "Close navigation menu"
+                  : "Open navigation menu"
+              }
+              aria-expanded={menuOpen}
+            >
+              {menuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile menu */}
+        <div
+          className={`
+            grid
+            transition-all
+            duration-300
+            ease-out
+            md:hidden
+            ${
+              menuOpen
+                ? "grid-rows-[1fr] opacity-100"
+                : "grid-rows-[0fr] opacity-0"
+            }
+          `}
+        >
+          <div className="overflow-hidden">
+            <div className="mt-4 border-t border-border pt-4">
+              <div className="flex flex-col gap-1">
+                <MobileLink
+                  href="/projects"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  PROJECTS
+                </MobileLink>
+
+                <MobileLink
+                  href="/work-experience"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  WORK
+                </MobileLink>
+
+                <MobileLink
+                  href="/blog"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  BLOG
+                </MobileLink>
+
+                <MobileLink
+                  href="/coding"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  CODING
+                </MobileLink>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
+  );
+}
+
+function NavLink({ href, children }) {
+  return (
+    <Link
+      href={href}
+      className="
+        text-sm
+        font-medium
+        transition-colors
+        duration-200
+        hover:text-primary
+      "
+    >
+      {children}
+    </Link>
+  );
+}
+
+function MobileLink({ href, children, onClick }) {
+  return (
+    <Link
+      href={href}
+      onClick={onClick}
+      className="
+        rounded-lg
+        px-3
+        py-3
+        text-sm
+        font-medium
+        transition-all
+        duration-200
+        hover:bg-muted
+        active:scale-[0.98]
+      "
+    >
+      {children}
+    </Link>
+  );
+}
+
+function ThemeButton() {
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <button
+        type="button"
+        className="
+          flex
+          h-10
+          w-10
+          items-center
+          justify-center
+          rounded-xl
+          border
+          border-border
+        "
+        aria-label="Toggle theme"
+      />
+    );
+  }
+
+  const isDark = resolvedTheme === "dark";
+
+  return (
+    <button
+      type="button"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className="
+        flex
+        h-10
+        w-10
+        items-center
+        justify-center
+        rounded-xl
+        border
+        border-border
+        transition-all
+        duration-200
+        hover:scale-105
+        hover:bg-muted
+        active:scale-95
+      "
+      aria-label="Toggle theme"
+    >
+      {isDark ? (
+        <Sun className="h-5 w-5" />
+      ) : (
+        <Moon className="h-5 w-5" />
+      )}
+    </button>
   );
 }
